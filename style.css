@@ -65,13 +65,19 @@ h1{
 #card{
     width: fit-content;
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    align-items: center;
     gap: 30px;
-    text-align: center;
+    justify-content: center;
 }
-@media(max-width: 820px){
-    .contenedor-card{
-        display: flex;
-        flex-direction: column;
+
+@media(max-width: 431px){
+    .contenedor-cartas{
+        width: 160px;
+    }
+}
+@media(max-width: 391px){
+    .contenedor-cartas{
+        width: 127px;
     }
 }
