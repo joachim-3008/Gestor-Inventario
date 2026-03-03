@@ -19,8 +19,11 @@ aggProducto.addEventListener("click", ()=>{
 
     padre.innerHTML = `
         <div class="contenedor-inf">
+            <label for="nombre-pro">Nombre del producto:</label>
             <input type="text" id="nombre-pro" class="inf" maxlength="29" placeholder="Escribe el nombre del producto">
+            <label for="precio-pro">Precio del producto:</label>
             <input type="number" id="precio-pro" class="inf" maxlength="29" placeholder="Escribe el precio del producto">
+            <label for="stock-pro">Stock del producto:</label>
             <input type="number" id="stock-pro" class="inf" maxlength="29" placeholder="Escribe la cantidad del producto">
             <button id="boton" class="buttons">Agregar</button>
         </div>
@@ -42,7 +45,7 @@ buton.addEventListener('click', () => {
 
 console.log(inventario);
 
-(nuevoPro.nombre && nuevoPro.precio && nuevoPro.stock) ?(
+(nuevoPro.nombre && nuevoPro.precio && nuevoPro.stock) ? (
     inventario.push(nuevoPro),
     localStorage.setItem('inventario', JSON.stringify(inventario)), //Aqui le decimos al navegador toma esta lista de objetos q cree y almacenala 
     crearCarta(nuevoPro),

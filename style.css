@@ -95,6 +95,10 @@ h1{
 /* ------------------------------------------------------------------------------- */
 
 /* botones */
+label{
+    color: white;
+    font-weight: bold;
+}
 .buttons{
     background-color: #3498db;
     color: white;
