@@ -54,4 +54,4 @@ El flujo de información se divide en tres procesos clave:
 ---
 
 ### 👤 Autor
-**Joaquín** - [GitHub Profile](https://github.com/joachim-3008)
+**Joachim** - [GitHub Profile](https://github.com/joachim-3008)
