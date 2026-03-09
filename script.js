@@ -2,7 +2,7 @@ let inventario = [];
 
 const contenedorCarta = document.querySelector("#card");
 const aggProducto = document.querySelector("#formulario");
-const padre = document.querySelector(".contenedor");
+const padre = document.querySelector(".contenedor-form");
 
 // -------------------------------------------------------------
 const datosAlmacenados = localStorage.getItem("inventario");
@@ -22,6 +22,9 @@ aggProducto.addEventListener("click", () => {
             <input type="number" id="precio-pro" class="inf" maxlength="29" placeholder="Escribe el precio del producto">
             <label for="stock-pro">Stock del producto:</label>
             <input type="number" id="stock-pro" class="inf" maxlength="29" placeholder="Escribe la cantidad del producto">
+            <label for="imagen-pro">Imagen del producto:</label>
+            <input type="file" id="imagen-pro" class="inf" accept="image/*">
+            <p>Recomendación: Verificar que la imagen que coloque tenga nombres diferentes.<p>
             <button id="boton" class="buttons">Agregar</button>
         </div>
         `;
@@ -29,29 +32,46 @@ aggProducto.addEventListener("click", () => {
   const nombre = document.querySelector("#nombre-pro");
   const precio = document.querySelector("#precio-pro");
   const stock = document.querySelector("#stock-pro");
+  const imagenInput = document.querySelector("#imagen-pro");
   const buton = document.querySelector("#boton");
 
   buton.addEventListener("click", () => {
-    const nuevoPro = {
-      nombre: nombre.value,
-      precio: parseFloat(precio.value),
-      stock: parseInt(stock.value),
-    };
+    const file = imagenInput.files[0]; // obtenemos el archivo seleccionado
 
-    console.log(inventario);
+    // verificamos que todos los campos y la imagen existan
+    if (nombre.value && precio.value && stock.value && file) {
+      const reader = new FileReader();
 
-    nuevoPro.nombre && nuevoPro.precio && nuevoPro.stock
-      ? (inventario.push(nuevoPro),
-        localStorage.setItem("inventario", JSON.stringify(inventario)), //Aqui le decimos al navegador toma esta lista de objetos q cree y almacenala
-        crearCarta(nuevoPro),
-        limpiarTarjeta())
-      : alert("Rellene todos los campos");
-  }); //este es agg el producto al inv
+      // cuando la imagen se termine de leer:
+      reader.onload = function (e) {
+        const nuevoPro = {
+          nombre: nombre.value,
+          precio: parseFloat(precio.value),
+          stock: parseInt(stock.value),
+          imagen: e.target.result // garda la imagen en tipo texto en (base 64)
+        };
+
+        inventario.push(nuevoPro);
+        localStorage.setItem("inventario", JSON.stringify(inventario));
+        crearCarta(nuevoPro);
+        limpiarTarjeta();
+      };
+
+      reader.readAsDataURL(file); // iniciamos la lectura de la imagen
+    } else {
+      alert("Rellene todos los campos, incluida la imagen");
+    }
+  });
 
   const limpiarTarjeta = () => {
     nombre.value = "";
     precio.value = "";
     stock.value = "";
+    padre.innerHTML = "";
+
+    imagenInput.type = "text"; 
+    imagenInput.type = "file"; 
+    imagenInput.value = "";
   };
 }); //este es agg el formulario a la pantalla
 
@@ -60,6 +80,9 @@ const crearCarta = (nuevoPro) => {
   carta.classList.add("contenedor-cartas");
 
   carta.innerHTML = `
+    <div class="foto-producto">
+        <img src="${nuevoPro.imagen}" alt="${nuevoPro.nombre}" style="width: 100%; border-radius: 8px;">
+    </div>
     <h3>${nuevoPro.nombre}</h3>
     <p><strong>Precio: </strong>$${nuevoPro.precio}</p>
     <p><strong>Stock: </strong>${nuevoPro.stock} uds</p>

@@ -10,8 +10,11 @@ body {
 /* contenedor agg productos */
 
 .contenedor {
-  display: flex;
-  flex-direction: row-reverse;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 30px; /* Espacio entre imagen y formulario */
+    padding: 20px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 .contenedor-inf {
@@ -61,9 +64,18 @@ body {
   gap: 25px;
   padding-bottom: 50px;
 }
+.contenedor-cartas img {
+    height: 150px;       
+    object-fit: cover;   
+    margin-bottom: 10px;
+}
+
 /* ------------------------------------------------------------------------------- */
 
 /* h1 */
+p{
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
 h1 {
   margin-top: 0;
@@ -180,38 +192,97 @@ label {
 }
 
 /* ------------------------------------------------------------------------------- */
+.img-left{
+  width: 100%;
+  border-radius: 20px;
+}
+/* ------------------------------------------------------------------------------- */
+input[type="file"].inf {
+    cursor: pointer;
+    font-size: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+input[type="file"]::file-selector-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: 0.3s;
+    font-weight: bold;
+}
+/* ------------------------------------------------------------------------------- */
+
+
 
 @media (max-width: 900px) {
-  h1 {
-    font-size: 1.3rem;
-  }
+    h1 {
+        font-size: 20.8px;
+    }
+
+    .contenedor {
+        flex-direction: column; 
+        align-items: center; 
+        gap: 30px;
+    }
+
+    .contenedor-img {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .img-left {
+        max-width: 100%; 
+    }
+
+    input[type="file"].inf {
+        font-size: 9px; 
+    }
 }
 
+
 @media (max-width: 600px) {
-  body {
-    padding: 0 15px;
-  }
+    body {
+        padding: 0 10px;
+    }
 
-  .nav-bar {
-    flex-direction: column;
-    gap: 15px;
-    padding: 15px 0;
-  }
+    .nav-bar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 0;
+        text-align: center;
+    }
 
-  .nav-left {
-    align-items: center;
-    text-align: center;
-  }
+    .nav-left {
+        justify-content: center;
+        align-items: center;
+    }
 
-  #formulario {
-    width: 100%;
-  }
+    #logo {
+        width: 50px; 
+    }
 
-  .contenedor-card {
-    grid-template-columns: 1fr;
-  }
+    #formulario {
+        width: 100%;
+        padding: 12px; 
+    }
 
-  .contenedor-inf {
-    padding: 20px;
-  }
+    .img-left {
+        max-width: 100%; 
+    }
+
+    .contenedor-inf {
+        width: 100%; 
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .contenedor-card {
+        grid-template-columns: 1fr; /* cartas de inventario se ordenan en una columna*/
+        justify-items: center;
+    }
 }
