@@ -1,8 +1,8 @@
 let inventario = [];
 
 const contenedorCarta = document.querySelector("#card");
-const aggProducto = document.querySelector("#formulario");
-const padre = document.querySelector(".contenedor-form");
+const btnAggProducto = document.querySelector("#formulario");
+const formulario = document.querySelector(".contenedor-form");
 
 // -------------------------------------------------------------
 const datosAlmacenados = localStorage.getItem("inventario");
@@ -13,8 +13,8 @@ datosAlmacenados
 
 // -------------------------------------------------------------
 
-aggProducto.addEventListener("click", () => {
-  padre.innerHTML = `
+btnAggProducto.addEventListener("click", () => {
+  formulario.innerHTML = `
         <div class="contenedor-inf">
             <label for="nombre-pro">Nombre del producto:</label>
             <input type="text" id="nombre-pro" class="inf" maxlength="29" placeholder="Escribe el nombre del producto">
@@ -40,9 +40,9 @@ aggProducto.addEventListener("click", () => {
 
     // verificamos que todos los campos y la imagen existan
     if (nombre.value && precio.value && stock.value && file) {
-      const reader = new FileReader();
+      const reader = new FileReader(); //crea una herramienta que lee archivos 
 
-      // cuando la imagen se termine de leer:
+      // determina que hacer cuando la lectura termine 
       reader.onload = function (e) {
         const nuevoPro = {
           nombre: nombre.value,
@@ -67,7 +67,7 @@ aggProducto.addEventListener("click", () => {
     nombre.value = "";
     precio.value = "";
     stock.value = "";
-    padre.innerHTML = "";
+    formulario.innerHTML = "";
 
     imagenInput.type = "text"; 
     imagenInput.type = "file"; 
